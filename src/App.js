@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import CardSection from './components/CardSection';
-import ChartSection from './components/ChartSection';
-import Header from './components/Header';
-import { AuthProvider } from './context/authContext';
-import Login from './components/auth/login/login';
-import SignUp from './components/auth/signup/signup';
+import { useEffect, useState, useCallback } from "react";
+import CardSection from "./components/CardSection";
+import ChartSection from "./components/ChartSection";
+import Header from "./components/Header";
+import { AuthProvider } from "./context/authContext";
+import Login from "./components/auth/login/login";
+import SignUp from "./components/auth/signup/signup";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Navigate } from 'react-router-dom';
-import { useAuth } from './context/authContext';
-import {motion} from 'framer-motion'
+import { Navigate } from "react-router-dom";
+import { useAuth } from "./context/authContext";
+import { motion } from "framer-motion";
 
 const ProtectedRoute = ({ children }) => {
   const { currentUser } = useAuth();
@@ -16,12 +16,15 @@ const ProtectedRoute = ({ children }) => {
 };
 
 const App = () => {
-  const [coinId, setCoinId] = useState("bitcoin"); //state to hold current coin id
-  const [coinData, setCoinData] = useState({}); // state to hold fetched coin data
+  const [coinId, setCoinId] = useState("bitcoin"); // State to hold current coin id
+  const [coinData, setCoinData] = useState({}); // State to hold fetched coin data
 
-  const fetchData = () => {
+  // Wrap fetchData with useCallback
+  const fetchData = useCallback(() => {
     // Create a new WebSocket connection to the backend
-    const ws = new WebSocket(process.env.REACT_APP_WS_URL || "ws://localhost:5000");
+    const ws = new WebSocket(
+      process.env.REACT_APP_WS_URL || "ws://localhost:5000"
+    );
 
     // When the WebSocket connection is open, send the request to the server
     ws.onopen = () => {
@@ -48,21 +51,29 @@ const App = () => {
     ws.onclose = () => {
       console.log("WebSocket connection closed");
     };
-  };
 
-  //function to handle submission of new crypto
+    // Cleanup function to close the WebSocket connection
+    return () => {
+      ws.close();
+    };
+  }, [coinId]); // coinId as dependency
+
+  // Function to handle submission of new crypto
   const handleSubmit = (e) => {
     const newCoinId = e.target.value;
     setCoinId(newCoinId);
   };
 
-  //useeffect to fetch data and set up interval for updation
+  // useEffect to fetch data and set up interval for updates
   useEffect(() => {
     fetchData();
     const interval = setInterval(fetchData, 60000);
-    return () => clearInterval(interval);}, [coinId]); //coinID act as dependency array i.e. refetch data when its values changes
+    return () => {
+      clearInterval(interval);
+    };
+  }, [fetchData]); // Now depends only on fetchData
 
-  //passing data as props to components
+  // Passing data as props to components
   return (
     <AuthProvider>
       <Router>
@@ -150,6 +161,6 @@ const App = () => {
       </Router>
     </AuthProvider>
   );
-}
+};
 
 export default App;

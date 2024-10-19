@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Chart from "react-apexcharts";
 import { motion } from 'framer-motion';
 
@@ -53,7 +53,7 @@ const ChartSection = ({
     });
 
     // Fetch chart data from WebSocket
-    const fetchData = () => {
+    const fetchData = useCallback(() => {
         const ws = new WebSocket(process.env.REACT_APP_WS_URL || 'ws://localhost:5000');
         
         ws.onopen = () => {
@@ -70,14 +70,15 @@ const ChartSection = ({
 
         ws.onerror = error => console.error('WebSocket error:', error);
         ws.onclose = () => console.log('WebSocket closed');
-    };
+    }, [id, priceData.options.selection]);
+
 
     // Fetch data every minute
     useEffect(() => {
         fetchData();
         const interval = setInterval(fetchData, 60000);
         return () => clearInterval(interval);
-    }, [id, priceData.options.selection]);
+    }, [fetchData]);
 
     return (
         <div className="p-4 bg-gray-900 text-white">
