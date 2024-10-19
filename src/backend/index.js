@@ -7,7 +7,7 @@ const WebSocket = require("ws");
 const app = express();
 const cache = new node_cache({ stdTTL: 60 }); // Cache for 60 seconds
 app.use(cors());
-const port = process.env.PORT || 5500
+const port = process.env.PORT || 5000
 
 // Setup HTTP server and WebSocket
 const server = require("http").createServer(app);

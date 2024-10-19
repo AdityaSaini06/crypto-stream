@@ -21,7 +21,7 @@ const App = () => {
 
   const fetchData = () => {
     // Create a new WebSocket connection to the backend
-    const ws = new WebSocket("ws://localhost:5000");
+    const ws = new WebSocket(process.env.REACT_APP_WS_URL || "ws://localhost:5000");
 
     // When the WebSocket connection is open, send the request to the server
     ws.onopen = () => {
