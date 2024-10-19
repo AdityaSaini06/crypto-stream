@@ -46,7 +46,7 @@ const CardSection = ({
       >
         {/* Market Cap Card */}
         <motion.div 
-          className="bg-gray-800 p-6 rounded-lg text-center shadow-md "
+          className="bg-gray-800 p-6 rounded-lg text-center shadow-md border-2 border-gray-800 hover:border-yellow-300 transition-all duration-300"
           variants={cardVariants}
           whileHover={{ scale: 1.05 }}
         >
@@ -56,7 +56,7 @@ const CardSection = ({
 
         {/* All Time High Card */}
         <motion.div 
-          className="bg-gray-800 p-6 rounded-lg text-center shadow-md "
+          className="bg-gray-800 p-6 rounded-lg text-center shadow-md border-2 border-gray-800 hover:border-yellow-300 transition-all duration-300"
           variants={cardVariants}
           whileHover={{ scale: 1.05 }}
         >
@@ -66,7 +66,7 @@ const CardSection = ({
 
         {/* All Time Low Card */}
         <motion.div 
-          className="bg-gray-800 p-6 rounded-lg text-center shadow-md "
+          className="bg-gray-800 p-6 rounded-lg text-center shadow-md border-2 border-gray-800 hover:border-yellow-300 transition-all duration-300"
           variants={cardVariants}
           whileHover={{ scale: 1.05 }}
         >
@@ -76,7 +76,7 @@ const CardSection = ({
 
         {/* Positive Sentiments Card */}
         <motion.div 
-          className="bg-gray-800 p-6 rounded-lg text-center shadow-md "
+          className="bg-gray-800 p-6 rounded-lg text-center shadow-md border-2 border-gray-800 hover:border-yellow-300 transition-all duration-300"
           variants={cardVariants}
           whileHover={{ scale: 1.05 }}
         >
@@ -86,7 +86,7 @@ const CardSection = ({
 
         {/* Highest 24Hrs Card */}
         <motion.div 
-          className="bg-gray-800 p-6 rounded-lg text-center shadow-md "
+          className="bg-gray-800 p-6 rounded-lg text-center shadow-md border-2 border-gray-800 hover:border-yellow-300 transition-all duration-300"
           variants={cardVariants}
           whileHover={{ scale: 1.05 }}
         >
@@ -96,7 +96,7 @@ const CardSection = ({
 
         {/* Lowest 24Hrs Card */}
         <motion.div 
-          className="bg-gray-800 p-6 rounded-lg text-center shadow-md "
+          className="bg-gray-800 p-6 rounded-lg text-center shadow-md border-2 border-gray-800 hover:border-yellow-300 transition-all duration-300"
           variants={cardVariants}
           whileHover={{ scale: 1.05 }}
         >
@@ -119,4 +119,4 @@ const CardSection = ({
   );
 }
 
-export default CardSection;  
+export default CardSection;

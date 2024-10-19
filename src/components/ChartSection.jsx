@@ -86,7 +86,7 @@ const ChartSection = ({
                 <div className="flex-1">
                     <div id="chart">
                         <div className="toolbar mb-4">
-                            {["1Day", "1Week", "1Month", "6Months", "1Year"].map((label, index) => {
+                            {["Daily", "Weekly", "Monthly", "Half-Yearly", "Yearly"].map((label, index) => {
                                 const days = [1, 7, 30, 182, 365][index];
                                 return (
                                     <button
@@ -113,7 +113,7 @@ const ChartSection = ({
                     ].map(stat => (
                         <motion.div
                             key={stat.label}
-                            className="bg-gray-800 p-4 rounded-lg shadow-md mb-4 flex flex-col justify-center items-center"
+                            className="bg-gray-800 p-4 rounded-lg shadow-md mb-4 flex flex-col justify-center items-center border border-gray-700 hover:border-orange-300 transition-all duration-300"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >

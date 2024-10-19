@@ -17,10 +17,10 @@ const SignOut = () => {
     };
 
     return (
-        // Button to trigger sign-out
+        // Button with fixed size
         <button 
             onClick={handleSignOut} 
-            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200">
+            className="bg-yellow-400 text-gray-800 rounded-lg py-2 px-4 h-10 w-30 whitespace-nowrap hover:bg-yellow-500 transition-colors duration-300">
             Sign Out
         </button>
     );
