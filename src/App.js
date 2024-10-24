@@ -26,10 +26,10 @@ const App = () => {
       process.env.REACT_APP_WS_URL || "ws://localhost:5000"
     );
 
-    // When the WebSocket connection is open, send the request to the server
+    // When WebSocket connection is open, send the request to the server
     ws.onopen = () => {
       const requestMess = JSON.stringify({
-        type: "cryptoData", // Type to indicate this is for coin data
+        type: "cryptoData", // Type to indicate it is for coin data
         id: coinId,
       });
       ws.send(requestMess);
@@ -39,7 +39,7 @@ const App = () => {
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
       console.log(data);
-      setCoinData(data); // Update your state with the received data
+      setCoinData(data); // Update state with the received data
     };
 
     // Handle WebSocket errors
@@ -65,13 +65,14 @@ const App = () => {
   };
 
   // useEffect to fetch data and set up interval for updates
+  //so automaticallly fetch data for the coin after 1 min and update
   useEffect(() => {
     fetchData();
     const interval = setInterval(fetchData, 60000);
     return () => {
       clearInterval(interval);
     };
-  }, [fetchData]); // Now depends only on fetchData
+  }, [fetchData]); // depends on fetchData
 
   // Passing data as props to components
   return (
